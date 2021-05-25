@@ -1,0 +1,168 @@
+package analizadores;
+
+import java_cup.runtime.Symbol;
+import java.util.LinkedList;
+
+
+/*Codigo para el parser*/
+
+parser code
+{:
+    public String resultado="";
+    public String error="";   
+    public static LinkedList <TError> TablaES= new LinkedList <TError>();
+
+
+/* El objeto Symbo tiene como parametro Value = Lexema,   right =fila y left=columna */
+    public void syntax_error (Symbol s)
+    {
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;        
+        error= "Error Sintactico: " + lexema +" en la linea "+ fila + " en la columna " + columna;
+        System.out.println(error);
+        System.out.println("============================================");
+        TError datosSintactico = new TError(lexema, fila, columna, "Error Sintactico", "Caracter no esperado");
+        TablaES.add(datosSintactico);
+    }
+    public void unrecovered_syntax_error (Symbol s)
+    {
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;        
+        error= "Error Sintactico: " + lexema +" en la linea "+ fila + " en la columna " + columna;
+        System.out.println(error);
+        System.out.println("============================================");
+        TError datosSintactico = new TError(lexema, fila, columna, "Error Sintactico", "Caracter no esperado");
+        TablaES.add(datosSintactico);
+    }
+:}
+
+/*Actiones Gramaticales*/
+action code
+{:
+:}
+
+
+/*Declarativa*/
+/*===Definir los terminales:  */
+terminal HTML_Apertura;
+terminal HTML_Cierre;
+terminal Encabezado_Apertura;
+terminal Encabezado_Cierre;
+terminal Tabla_Apertura;
+terminal Tabla_Cierre;
+terminal Cuerpo_Apertura;
+terminal Cuerpo_Cierre;
+terminal Fila_Apertura;
+terminal Fila_Cierre;
+terminal Lista_Apertura;
+terminal Lista_Cierre;
+terminal Imagen_Apertura;
+terminal Imagen_Cierre;
+terminal Titulo;
+terminal Columna;
+terminal Email;
+terminal Enlace;
+terminal Igual;
+terminal Suma;
+terminal Resta;
+terminal Multiplicacion;
+terminal Division;
+terminal Parentesis_Apertura;
+terminal Parentesis_Cierre;
+terminal Letra;
+terminal Sim_Apertura;
+terminal Sim_Cierre;
+terminal Punto_Coma;
+terminal Comillas;
+terminal Numeros;
+terminal Informacion_O_Identificador;
+terminal Link_Enlace;
+terminal Decimal;
+terminal Atributo;
+terminal Prueba;
+terminal Negrita;
+terminal Imprimir;
+terminal Dos_Puntos;
+terminal Informacion;
+terminal Dato_O_InformacionDesconocida;
+
+/*===Definir los no terminales:*/
+
+non terminal String EstadoInicial, E, Encabezado, Cuerpo, Tablas, Filas, Columnas, NumerosODecimales, 
+                    DatosDeColumna, Igualdad, Operaciones, Operadores, Atributos, Listas, Enlaces, Imagenes,
+                    InformacionMultiple, PostOperacion, AnteOperacion, PosibleParentesisApertura, PosibleParentesisCierre, OperacionCompleta;
+
+
+/*Precedencias*/
+precedence left HTML_Apertura, HTML_Cierre, Encabezado_Apertura, Encabezado_Cierre, Tabla_Apertura, Tabla_Cierre;
+precedence left Cuerpo_Apertura, Cuerpo_Cierre, Fila_Apertura, Fila_Cierre, Lista_Apertura, Lista_Cierre;
+precedence left Imagen_Apertura, Imagen_Cierre, Titulo, Columna, Email, Enlace;
+precedence left Igual, Suma, Resta, Multiplicacion, Division;
+precedence left Comillas, Numeros, Informacion_O_Identificador, Parentesis_Apertura, Parentesis_Cierre;
+precedence left Link_Enlace, Atributo, Dos_Puntos, Decimal, Dato_O_InformacionDesconocida;
+/*precedence left Prueba, Negrita, Imprimir, Sim_Apertura, Sim_Cierre, Punto_Coma;*/
+start with EstadoInicial;
+
+EstadoInicial::= E:a  {: resultado=a; :};   /*Regla de Produccion*/
+
+E::= HTML_Apertura Encabezado Cuerpo HTML_Cierre;
+
+Encabezado::= |Encabezado_Apertura Titulo Igual Informacion_O_Identificador Encabezado_Cierre;
+
+Cuerpo::= |Cuerpo_Apertura Tablas Listas Enlaces Imagenes Cuerpo_Cierre;
+
+Tablas::= |Tabla_Apertura Atributos Filas Tabla_Cierre Tablas;
+
+Filas::= Fila_Apertura Columnas Fila_Cierre
+        |Fila_Apertura Columnas Fila_Cierre Filas;
+
+Columnas::= Columna Igual Comillas DatosDeColumna Comillas
+            |Columna Igual Informacion_O_Identificador 
+            |Columna Igual Comillas DatosDeColumna Comillas Columnas
+            |Columna Igual Informacion_O_Identificador Columnas
+            |Columna Igual Imagenes
+            |Columna Igual Imagenes Columnas;
+
+DatosDeColumna::= Operaciones
+                |OperacionCompleta
+                |Numeros
+                |Email;
+
+Igualdad::=Igual
+            |Dos_Puntos;
+
+InformacionMultiple::= |Informacion_O_Identificador InformacionMultiple
+                        |Dato_O_InformacionDesconocida InformacionMultiple;
+
+OperacionCompleta::= AnteOperacion PosibleParentesisApertura Operaciones PosibleParentesisCierre PostOperacion;
+
+NumerosODecimales::= Decimal
+                    |Numeros;
+
+Operaciones::=NumerosODecimales Operadores NumerosODecimales
+            |NumerosODecimales Operadores NumerosODecimales Operadores NumerosODecimales;
+
+PostOperacion::= |Operadores NumerosODecimales PostOperacion;
+
+AnteOperacion::= |NumerosODecimales Operadores AnteOperacion;
+
+PosibleParentesisApertura::= |Parentesis_Apertura;
+
+PosibleParentesisCierre::= |Parentesis_Cierre;
+
+Operadores::= Suma
+            |Resta
+            |Multiplicacion
+            |Division;
+
+Atributos::= |Atributo Igualdad Numeros Atributos;
+
+Listas::= |Lista_Apertura InformacionMultiple Lista_Cierre Listas;
+
+Enlaces::= |Enlace Igual Link_Enlace Enlaces;
+
+Imagenes::= |Imagen_Apertura Atributo Igual Informacion_O_Identificador Enlaces Atributos Imagen_Cierre Imagenes
+            |Imagen_Apertura Dato_O_InformacionDesconocida Imagen_Cierre Imagenes;
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/Tokens.java</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/AnalizadorLexico.java</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/TError.java</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/Lexer.java</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/Generador.java</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/GeneradorLexico/GeneradorSintactico.bat</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/sintactico.cup</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/Simbolos.java</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/lexico.flex</file>
+            <file>file:/C:/Users/elmat/OneDrive/Documentos/NetBeansProjects/ProyectoHTMLFINAL/src/analizadores/sintactico.java</file>
+        </group>
+    </open-files>
+</project-private>

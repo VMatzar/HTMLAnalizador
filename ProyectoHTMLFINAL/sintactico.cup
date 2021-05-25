@@ -1,0 +1,87 @@
+/* Codigo de Usuario*/
+package analizadores;
+import java_cup.runtime.Symbol;
+import java.util.LinkedList;
+
+
+/* Codigo para el parser, variables, metodos   */
+
+
+parser code
+{: 
+    public String resultado="";
+    public static LinkedList<TError> TablaES= new LinkedList<TError>)();
+    public String error="";
+    
+    public void syntax_error (Symbol s)
+    {
+        String lexema = s.value.toString();
+        int  fila = s.right;
+        int  columna = s.left;
+        error=" Error Sintactico: " + lexema +" en la fila: "+ fila + " en la columna: " + columna;
+        
+        System.out.println("Error Sintactico");
+        System.out.println("Lexema" + lexema);
+        System.out.println("Fila:"+ fila);
+        System.out.println("Columna: "+columna);
+        System.out.println("============================================");
+        
+        TError datosSintactico = new TError(lexema, fila, columna, "Error Sintactico", "Token no esperado");
+        TablaES.add(datosSintactico);
+    }
+
+    public void unrecovered_syntac_error (Symbol s) throws java.lang.Exception
+    {
+        String lexema = s.value.toString();
+        int  fila = s.right;
+        int  columna = s.left;        
+        System.out.println("Error Sintactico, Panic Mode");
+        System.out.println("Lexema" + lexema);
+        System.out.println("Fila:"+ fila);
+        System.out.println("Columna: "+columna);
+        System.out.println("============================================");        
+      }
+
+    
+:}
+/*Actiones Gramaticales*/
+action code 
+{:
+:}
+
+
+/* Declaraciones*/
+
+terminales Suma, Resta, Multiplicacion,Division;
+terminal Numero, NumeroReal;
+
+non terminal String  INICIO; E;
+
+
+/*Precedencias*/
+
+precedence left  Suma, Resta;
+precedence left  Multiplicacion, Division;
+
+start with INICIO;
+
+INICIO::= E:a    {: :} ;
+
+E::=  E:a  Suma E:b {: :}
+    |E:a  Resta E:b {: :}
+    |E:a  Multiplicacion E:b {: :}
+    |E:a  Division E:b {: :} 
+    |Numero:a {: :} 
+    |NumeroReal:a {: :};
+
+
+
+
+
+
+
+
+
+
+
+
