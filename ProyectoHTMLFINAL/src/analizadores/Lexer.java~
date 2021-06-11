@@ -913,7 +913,7 @@ public class Lexer implements java_cup.runtime.Scanner {
             }
           case 42: break;
           case 2: 
-            { System.out.println("Reconocio token: "+yytext()+" Letra"); lexema=yytext(); return new Symbol(Simbolos.Letra, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Dato O Informacion Desconocida"); lexema=yytext(); return new Symbol(Simbolos.Dato_O_InformacionDesconocida, yycolumn, yyline, yytext());
             }
           case 43: break;
           case 3: 

@@ -92,7 +92,9 @@ terminal Dato_O_InformacionDesconocida;
 
 non terminal String EstadoInicial, E, Encabezado, Cuerpo, Tablas, Filas, Columnas, NumerosODecimales, 
                     DatosDeColumna, Igualdad, Operaciones, Operadores, Atributos, Listas, Enlaces, Imagenes,
-                    InformacionMultiple, PostOperacion, AnteOperacion, PosibleParentesisApertura, PosibleParentesisCierre, OperacionCompleta;
+                    InformacionMultiple, PostOperacion, AnteOperacion, PosibleParentesisApertura, PosibleParentesisCierre, OperacionCompleta,
+                    Pruebas, Impresiones, DatoPrueba, Asignacion, Negritas;
+                        
 
 
 /*Precedencias*/
@@ -101,8 +103,10 @@ precedence left Cuerpo_Apertura, Cuerpo_Cierre, Fila_Apertura, Fila_Cierre, List
 precedence left Imagen_Apertura, Imagen_Cierre, Titulo, Columna, Email, Enlace;
 precedence left Igual, Suma, Resta, Multiplicacion, Division;
 precedence left Comillas, Numeros, Informacion_O_Identificador, Parentesis_Apertura, Parentesis_Cierre;
-precedence left Link_Enlace, Atributo, Dos_Puntos, Decimal, Dato_O_InformacionDesconocida;
-/*precedence left Prueba, Negrita, Imprimir, Sim_Apertura, Sim_Cierre, Punto_Coma;*/
+precedence left Link_Enlace, Atributo, Dos_Puntos, Decimal, Punto_Coma, Dato_O_InformacionDesconocida;
+precedence left Prueba, Negrita, Imprimir;
+
+/*precedence left Sim_Apertura, Sim_Cierre;*/
 start with EstadoInicial;
 
 EstadoInicial::= E:a  {: resultado=a; :};   /*Regla de Produccion*/
@@ -111,7 +115,7 @@ E::= HTML_Apertura Encabezado Cuerpo HTML_Cierre;
 
 Encabezado::= |Encabezado_Apertura Titulo Igual Informacion_O_Identificador Encabezado_Cierre;
 
-Cuerpo::= |Cuerpo_Apertura Tablas Listas Enlaces Imagenes Cuerpo_Cierre;
+Cuerpo::= |Cuerpo_Apertura Tablas Pruebas Tablas Listas Enlaces Imagenes Cuerpo_Cierre;
 
 Tablas::= |Tabla_Apertura Atributos Filas Tabla_Cierre Tablas;
 
@@ -151,6 +155,17 @@ AnteOperacion::= |NumerosODecimales Operadores AnteOperacion;
 PosibleParentesisApertura::= |Parentesis_Apertura;
 
 PosibleParentesisCierre::= |Parentesis_Cierre;
+
+Pruebas::= |Prueba Negritas Asignacion Impresiones Pruebas;
+
+Negritas::= |Negrita Parentesis_Apertura DatoPrueba Parentesis_Cierre Negritas;
+
+Impresiones::= |Imprimir Parentesis_Apertura DatoPrueba Parentesis_Cierre Impresiones;
+
+Asignacion::= |Dato_O_InformacionDesconocida Igual Operaciones Punto_Coma Asignacion
+                |Dato_O_InformacionDesconocida Igual OperacionCompleta Punto_Coma Asignacion;
+
+DatoPrueba::= NumerosODecimales|Dato_O_InformacionDesconocida;
 
 Operadores::= Suma
             |Resta

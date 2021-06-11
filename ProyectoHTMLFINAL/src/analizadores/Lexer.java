@@ -538,6 +538,20 @@ public class Lexer implements java_cup.runtime.Scanner {
     public String lexema;
     public static LinkedList <TError> TablaEL= new LinkedList <TError>();
 
+    //Estructura que almacene todos los tokens
+    public static LinkedList <TablaLexica> TL = new LinkedList <TablaLexica>();
+
+    public LinkedList getListado(){
+    return TL;
+    }
+
+    public String getListados(){
+    String resultado="";
+    for (TablaLexica data: TL)
+        resultado = resultado + data.getLexema()+"\n";
+    return resultado;
+    }
+
 
   /**
    * Creates a new scanner
@@ -913,11 +927,19 @@ public class Lexer implements java_cup.runtime.Scanner {
             }
           case 42: break;
           case 2: 
-            { System.out.println("Reconocio token: "+yytext()+" Dato O Informacion Desconocida"); lexema=yytext(); return new Symbol(Simbolos.Dato_O_InformacionDesconocida, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Dato O Informacion Desconocida"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Dato o Informacion Desconocida");
+        TL.add(data);
+        return new Symbol(Simbolos.Dato_O_InformacionDesconocida, yycolumn, yyline, yytext());
             }
           case 43: break;
           case 3: 
-            { System.out.println("Reconocio token: "+yytext()+" Numeros"); lexema=yytext(); return new Symbol(Simbolos.Numeros, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Numeros"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Numeros");
+        TL.add(data); 
+        return new Symbol(Simbolos.Numeros, yycolumn, yyline, yytext());
             }
           case 44: break;
           case 4: 
@@ -925,151 +947,299 @@ public class Lexer implements java_cup.runtime.Scanner {
             }
           case 45: break;
           case 5: 
-            { System.out.println("Reconocio token: "+yytext()+" Sim_Apertura"); lexema=yytext(); return new Symbol(Simbolos.Sim_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Sim_Apertura"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Simbolo Menor que");
+        TL.add(data);
+        return new Symbol(Simbolos.Sim_Apertura, yycolumn, yyline, yytext());
             }
           case 46: break;
           case 6: 
-            { System.out.println("Reconocio token: "+yytext()+" Resta"); lexema=yytext(); return new Symbol(Simbolos.Resta, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Resta"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Signo de Resta");
+        TL.add(data); 
+        return new Symbol(Simbolos.Resta, yycolumn, yyline, yytext());
             }
           case 47: break;
           case 7: 
-            { System.out.println("Reconocio token: "+yytext()+" Sim_Cierre"); lexema=yytext(); return new Symbol(Simbolos.Sim_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Sim_Cierre"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Simbolo Mayor que");
+        TL.add(data);
+        return new Symbol(Simbolos.Sim_Cierre, yycolumn, yyline, yytext());
             }
           case 48: break;
           case 8: 
-            { System.out.println("Reconocio token: "+yytext()+" Division"); lexema=yytext(); return new Symbol(Simbolos.Division, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Division"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Signo de Division");
+        TL.add(data); 
+        return new Symbol(Simbolos.Division, yycolumn, yyline, yytext());
             }
           case 49: break;
           case 9: 
-            { System.out.println("Reconocio token: "+yytext()+" Multiplicacion"); lexema=yytext(); return new Symbol(Simbolos.Multiplicacion, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Multiplicacion"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Signo de Multiplicacion");
+        TL.add(data); 
+        return new Symbol(Simbolos.Multiplicacion, yycolumn, yyline, yytext());
             }
           case 50: break;
           case 10: 
-            { System.out.println("Reconocio token: "+yytext()+" Igual"); lexema=yytext(); return new Symbol(Simbolos.Igual, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Igual"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Signo de Igual");
+        TL.add(data); 
+        return new Symbol(Simbolos.Igual, yycolumn, yyline, yytext());
             }
           case 51: break;
           case 11: 
-            { System.out.println("Reconocio token: "+yytext()+" Suma"); lexema=yytext(); return new Symbol(Simbolos.Suma, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Suma"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Signo de suma");
+        TL.add(data); 
+        return new Symbol(Simbolos.Suma, yycolumn, yyline, yytext());
             }
           case 52: break;
           case 12: 
-            { System.out.println("Reconocio token: "+yytext()+" Parentesis_Apertura"); lexema=yytext(); return new Symbol(Simbolos.Parentesis_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Parentesis_Apertura"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Parentesis de Apertura");
+        TL.add(data); 
+        return new Symbol(Simbolos.Parentesis_Apertura, yycolumn, yyline, yytext());
             }
           case 53: break;
           case 13: 
-            { System.out.println("Reconocio token: "+yytext()+" Parentesis_Cierre"); lexema=yytext(); return new Symbol(Simbolos.Parentesis_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Parentesis_Cierre"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Parentesis de Cierre");
+        TL.add(data); 
+        return new Symbol(Simbolos.Parentesis_Cierre, yycolumn, yyline, yytext());
             }
           case 54: break;
           case 14: 
-            { System.out.println("Reconocio token: "+yytext()+" Punto_Coma"); lexema=yytext(); return new Symbol(Simbolos.Punto_Coma, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Punto_Coma"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Punto y Coma");
+        TL.add(data);
+        return new Symbol(Simbolos.Punto_Coma, yycolumn, yyline, yytext());
             }
           case 55: break;
           case 15: 
-            { System.out.println("Reconocio token: "+yytext()+" Dos_Puntos"); lexema=yytext(); return new Symbol(Simbolos.Dos_Puntos, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Dos_Puntos"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Dos Puntos");
+        TL.add(data);
+        return new Symbol(Simbolos.Dos_Puntos, yycolumn, yyline, yytext());
             }
           case 56: break;
           case 16: 
-            { System.out.println("Reconocio token: "+yytext()+" Comillas"); lexema=yytext(); return new Symbol(Simbolos.Comillas, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Comillas"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Comillas");
+        TL.add(data);
+        return new Symbol(Simbolos.Comillas, yycolumn, yyline, yytext());
             }
           case 57: break;
           case 17: 
-            { System.out.println("Reconocio token: "+yytext()+" Email"); lexema=yytext(); return new Symbol(Simbolos.Email, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Email"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Correo Electronico");
+        TL.add(data);
+        return new Symbol(Simbolos.Email, yycolumn, yyline, yytext());
             }
           case 58: break;
           case 18: 
-            { System.out.println("Reconocio token: "+yytext()+" Decimal"); lexema=yytext(); return new Symbol(Simbolos.Decimal, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Decimal"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Decimal");
+        TL.add(data);
+        return new Symbol(Simbolos.Decimal, yycolumn, yyline, yytext());
             }
           case 59: break;
           case 19: 
-            { System.out.println("Reconocio token: "+yytext()+" Titulo"); lexema=yytext(); return new Symbol(Simbolos.Titulo, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Titulo"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Titulo");
+        TL.add(data);
+        return new Symbol(Simbolos.Titulo, yycolumn, yyline, yytext());
             }
           case 60: break;
           case 20: 
-            { System.out.println("Reconocio token: "+yytext()+" Informacion_O_Identificador"); lexema=yytext(); return new Symbol(Simbolos.Informacion_O_Identificador, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Informacion_O_Identificador"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Informacion o identificador");
+        TL.add(data);
+        return new Symbol(Simbolos.Informacion_O_Identificador, yycolumn, yyline, yytext());
             }
           case 61: break;
           case 21: 
-            { System.out.println("Reconocio token: "+yytext()+" Fila_Apertura"); lexema=yytext(); return new Symbol(Simbolos.Fila_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Fila_Apertura"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Apertura de Fila");
+        TL.add(data);
+        return new Symbol(Simbolos.Fila_Apertura, yycolumn, yyline, yytext());
             }
           case 62: break;
           case 22: 
-            { System.out.println("Reconocio token: "+yytext()+" Atributo"); lexema=yytext(); return new Symbol(Simbolos.Atributo, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Atributo"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Atributo");
+        TL.add(data);
+        return new Symbol(Simbolos.Atributo, yycolumn, yyline, yytext());
             }
           case 63: break;
           case 23: 
-            { System.out.println("Reconocio token: "+yytext()+" Enlace"); lexema=yytext(); return new Symbol(Simbolos.Enlace, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Enlace"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Enlace");
+        TL.add(data);
+        return new Symbol(Simbolos.Enlace, yycolumn, yyline, yytext());
             }
           case 64: break;
           case 24: 
-            { System.out.println("Reconocio token: "+yytext()+" Prueba"); lexema=yytext(); return new Symbol(Simbolos.Prueba, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Prueba"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Prueba");
+        TL.add(data); 
+        return new Symbol(Simbolos.Prueba, yycolumn, yyline, yytext());
             }
           case 65: break;
           case 25: 
-            { System.out.println("Reconocio token: "+yytext()+" Negrita"); lexema=yytext(); return new Symbol(Simbolos.Negrita, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Negrita"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Negrita");
+        TL.add(data);
+        return new Symbol(Simbolos.Negrita, yycolumn, yyline, yytext());
             }
           case 66: break;
           case 26: 
-            { System.out.println("Reconocio token: "+yytext()+" Columna"); lexema=yytext(); return new Symbol(Simbolos.Columna, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Columna"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Columna");
+        TL.add(data);
+        return new Symbol(Simbolos.Columna, yycolumn, yyline, yytext());
             }
           case 67: break;
           case 27: 
-            { System.out.println("Reconocio token: "+yytext()+" Link_Enlace"); lexema=yytext(); return new Symbol(Simbolos.Link_Enlace, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Link_Enlace"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Link del Enlace");
+        TL.add(data);
+        return new Symbol(Simbolos.Link_Enlace, yycolumn, yyline, yytext());
             }
           case 68: break;
           case 28: 
-            { System.out.println("Reconocio token: "+yytext()+" HTML_Apertura"); lexema=yytext(); return new Symbol(Simbolos.HTML_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" HTML_Apertura"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Dato de Apertura HTML");
+        TL.add(data);
+        return new Symbol(Simbolos.HTML_Apertura, yycolumn, yyline, yytext());
             }
           case 69: break;
           case 29: 
-            { System.out.println("Reconocio token: "+yytext()+" Imprimir"); lexema=yytext(); return new Symbol(Simbolos.Imprimir, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Imprimir"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Imprimir");
+        TL.add(data);
+        return new Symbol(Simbolos.Imprimir, yycolumn, yyline, yytext());
             }
           case 70: break;
           case 30: 
-            { System.out.println("Reconocio token: "+yytext()+" Tabla_Apertura"); lexema=yytext(); return new Symbol(Simbolos.Tabla_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Tabla_Apertura"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Apertura de Tabla");
+        TL.add(data);
+        return new Symbol(Simbolos.Tabla_Apertura, yycolumn, yyline, yytext());
             }
           case 71: break;
           case 31: 
-            { System.out.println("Reconocio token: "+yytext()+" Lista_Apertura"); lexema=yytext(); return new Symbol(Simbolos.Lista_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Lista_Apertura"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Apertura de Lista");
+        TL.add(data);
+        return new Symbol(Simbolos.Lista_Apertura, yycolumn, yyline, yytext());
             }
           case 72: break;
           case 32: 
-            { System.out.println("Reconocio token: "+yytext()+" HTML_Cierre"); lexema=yytext(); return new Symbol(Simbolos.HTML_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" HTML_Cierre"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Dato de Cierre HTML");
+        TL.add(data);
+        return new Symbol(Simbolos.HTML_Cierre, yycolumn, yyline, yytext());
             }
           case 73: break;
           case 33: 
-            { System.out.println("Reconocio token: "+yytext()+" Fila_Cierre"); lexema=yytext(); return new Symbol(Simbolos.Fila_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Fila_Cierre"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Cierre de Fila");
+        TL.add(data);
+        return new Symbol(Simbolos.Fila_Cierre, yycolumn, yyline, yytext());
             }
           case 74: break;
           case 34: 
-            { System.out.println("Reconocio token: "+yytext()+" Imagen_Apertura"); lexema=yytext(); return new Symbol(Simbolos.Imagen_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Imagen_Apertura"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Apertura de Imagen");
+        TL.add(data);
+        return new Symbol(Simbolos.Imagen_Apertura, yycolumn, yyline, yytext());
             }
           case 75: break;
           case 35: 
-            { System.out.println("Reconocio token: "+yytext()+" Tabla_Cierre"); lexema=yytext(); return new Symbol(Simbolos.Tabla_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Tabla_Cierre"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Cierre de Tabla");
+        TL.add(data);
+        return new Symbol(Simbolos.Tabla_Cierre, yycolumn, yyline, yytext());
             }
           case 76: break;
           case 36: 
-            { System.out.println("Reconocio token: "+yytext()+" Lista_Cierre"); lexema=yytext(); return new Symbol(Simbolos.Lista_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Lista_Cierre"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Cierre de Lista");
+        TL.add(data);
+        return new Symbol(Simbolos.Lista_Cierre, yycolumn, yyline, yytext());
             }
           case 77: break;
           case 37: 
-            { System.out.println("Reconocio token: "+yytext()+" Imagen_Cierre"); lexema=yytext(); return new Symbol(Simbolos.Imagen_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Imagen_Cierre"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Cierre de Imagen");
+        TL.add(data);
+        return new Symbol(Simbolos.Imagen_Cierre, yycolumn, yyline, yytext());
             }
           case 78: break;
           case 38: 
-            { System.out.println("Reconocio token: "+yytext()+" Cuerpo_Apertura"); lexema=yytext(); return new Symbol(Simbolos.Cuerpo_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Cuerpo_Apertura"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Apertura de Cuerpo");
+        TL.add(data);
+        return new Symbol(Simbolos.Cuerpo_Apertura, yycolumn, yyline, yytext());
             }
           case 79: break;
           case 39: 
-            { System.out.println("Reconocio token: "+yytext()+" Cuerpo_Cierre"); lexema=yytext(); return new Symbol(Simbolos.Cuerpo_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Cuerpo_Cierre"); 
+        lexema=yytext();
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Cierre de Cuerpo");
+        TL.add(data);
+        return new Symbol(Simbolos.Cuerpo_Cierre, yycolumn, yyline, yytext());
             }
           case 80: break;
           case 40: 
-            { System.out.println("Reconocio token: "+yytext()+" Encabezado_Apertura"); lexema=yytext(); return new Symbol(Simbolos.Encabezado_Apertura, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Encabezado_Apertura"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Apertura de Encabezado");
+        TL.add(data);
+        return new Symbol(Simbolos.Encabezado_Apertura, yycolumn, yyline, yytext());
             }
           case 81: break;
           case 41: 
-            { System.out.println("Reconocio token: "+yytext()+" Encabezado_Cierre"); lexema=yytext(); return new Symbol(Simbolos.Encabezado_Cierre, yycolumn, yyline, yytext());
+            { System.out.println("Reconocio token: "+yytext()+" Encabezado_Cierre"); 
+        lexema=yytext(); 
+        TablaLexica data = new TablaLexica(yytext(),yyline,yycolumn,"Cierre de Encabezado");
+        TL.add(data);
+        return new Symbol(Simbolos.Encabezado_Cierre, yycolumn, yyline, yytext());
             }
           case 82: break;
           default:
